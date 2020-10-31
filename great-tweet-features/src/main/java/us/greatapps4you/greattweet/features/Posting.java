@@ -6,7 +6,7 @@ public abstract class Posting {
 
     private String message;
 
-    public Posting message(String message) {
+    public Posting tweet(String message) {
         this.message = message;
         return this;
     }
