@@ -4,14 +4,14 @@ import java.util.List;
 
 public class User {
     private int id;
-    private String userName;
-    private String nickName;
+    private String uniqueName;
+    private String name;
     private List<User> following;
     private List<Message> messages;
 
-    public User(String userName, String nickName) {
-        this.userName = userName;
-        this.nickName = nickName;
+    public User(String uniqueName, String name) {
+        this.uniqueName = uniqueName;
+        this.name = name;
     }
 
     public User(){}
@@ -24,20 +24,20 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUniqueName() {
+        return uniqueName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUniqueName(String uniqueName) {
+        this.uniqueName = uniqueName;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getName() {
+        return name;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<User> getFollowing() {
@@ -63,22 +63,22 @@ public class User {
 
         User user = (User) o;
 
-        if (!userName.equals(user.userName)) return false;
-        return nickName.equals(user.nickName);
+        if (!uniqueName.equals(user.uniqueName)) return false;
+        return name.equals(user.name);
     }
 
     @Override
     public int hashCode() {
-        int result = userName.hashCode();
-        result = 31 * result + nickName.hashCode();
+        int result = uniqueName.hashCode();
+        result = 31 * result + name.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + userName + '\'' +
-                ", nickName='" + nickName + '\'' +
+                "uniqueName='" + uniqueName + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
