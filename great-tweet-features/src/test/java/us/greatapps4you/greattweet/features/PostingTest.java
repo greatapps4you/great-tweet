@@ -13,8 +13,8 @@ class PostingTest {
     void setUp() {
         mockPosting = new Posting() {
             @Override
-            public Response postMessage(User user, String message) {
-                return Response.OK;
+            public String postMessage(User user, String message) {
+                return "Hey this is my first Great Tweet!";
             }
         };
     }
@@ -22,10 +22,11 @@ class PostingTest {
     @Test
     void givenUserAndMessageThenReturnOk() {
         User jose = new User("Jose Esteves", "josethedeveloper");
-        Response response = mockPosting
-                .tweet("Hey this is my first Great Tweet!")
+        String message = "Hey this is my first Great Tweet!";
+        String result = mockPosting
+                .tweet(message)
                 .withUser(jose);
-        Assertions.assertEquals(Response.OK, response);
+        Assertions.assertEquals(message, result);
     }
 
 

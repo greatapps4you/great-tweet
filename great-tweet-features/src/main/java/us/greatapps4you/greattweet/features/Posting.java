@@ -11,9 +11,9 @@ public abstract class Posting {
         return this;
     }
 
-    public Response withUser(User user) {
+    public String withUser(User user) {
         return this.postMessage(user, this.message);
     }
 
-    public abstract Response postMessage(User user, String message);
+    public abstract String postMessage(User user, String message);
 }
