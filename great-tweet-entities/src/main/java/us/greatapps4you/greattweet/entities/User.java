@@ -9,11 +9,9 @@ public class User {
     private List<User> following;
     private List<Message> messages;
 
-    public User(String userName, String nickName, List<User> following, List<Message> messages) {
+    public User(String userName, String nickName) {
         this.userName = userName;
         this.nickName = nickName;
-        this.following = following;
-        this.messages = messages;
     }
 
     public User(){}
