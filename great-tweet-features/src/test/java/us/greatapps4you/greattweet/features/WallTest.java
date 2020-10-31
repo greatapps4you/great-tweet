@@ -37,7 +37,7 @@ class WallTest {
 
     @Test
     void givenUserThenReturnMessage() {
-        User jose = new User("Jose Esteves", "josethedeveloper");
+        User jose = new User("josethedeveloper", "Jose Esteves");
         List<Message> actual = wall.getMessages(jose);
         LocalDateTime timePosted = LocalDateTime.of(2020, 10, 31, 15, 0, 0);
         Message expected = new Message("Hey this is my first Great Tweet!", timePosted);
@@ -46,7 +46,7 @@ class WallTest {
 
     @Test
     void givenUserThenReturnMessagesInReverseChronologicalOrder() {
-        User jose = new User("Jose Esteves", "josethedeveloper");
+        User jose = new User("josethedeveloper", "Jose Esteves");
         List<Message> actual = wall.getMessages(jose);
         LocalDateTime timePosted = LocalDateTime.of(2020, 10, 31, 15, 0, 0);
 

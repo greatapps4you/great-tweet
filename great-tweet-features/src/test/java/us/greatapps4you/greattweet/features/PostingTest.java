@@ -21,7 +21,7 @@ class PostingTest {
 
     @Test
     void givenUserAndMessageThenReturnOk() {
-        User jose = new User("Jose Esteves", "josethedeveloper");
+        User jose = new User("josethedeveloper", "Jose Esteves");
         String message = "Hey this is my first Great Tweet!";
         String result = mockPosting
                 .tweet(message)

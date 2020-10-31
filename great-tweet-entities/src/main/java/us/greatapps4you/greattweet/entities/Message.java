@@ -12,7 +12,8 @@ public class Message {
         this.publicationTime = publicationTime;
     }
 
-    public Message(){}
+    public Message() {
+    }
 
     public int getId() {
         return id;

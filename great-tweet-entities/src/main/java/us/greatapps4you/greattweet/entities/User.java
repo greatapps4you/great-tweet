@@ -6,7 +6,7 @@ public class User {
     private int id;
     private String uniqueName;
     private String name;
-    private List<User> following;
+    private List<String> following;
     private List<Message> messages;
 
     public User(String uniqueName, String name) {
@@ -14,7 +14,8 @@ public class User {
         this.name = name;
     }
 
-    public User(){}
+    public User() {
+    }
 
     public int getId() {
         return id;
@@ -40,11 +41,11 @@ public class User {
         this.name = name;
     }
 
-    public List<User> getFollowing() {
+    public List<String> getFollowing() {
         return following;
     }
 
-    public void setFollowing(List<User> following) {
+    public void setFollowing(List<String> following) {
         this.following = following;
     }
 
