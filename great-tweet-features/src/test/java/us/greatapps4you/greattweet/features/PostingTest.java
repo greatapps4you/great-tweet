@@ -8,9 +8,14 @@ class PostingTest {
 
     @Test
     void givenUserAndMessagethenReturnOk(){
-        Posting posting = new Posting();
+        Posting mockPosting = new Posting() {
+            @Override
+            public Response postMessage(User user, String message) {
+                return Response.OK;
+            }
+        };
         User jose = new User("Jose Esteves", "josethedeveloper");
-        Response response = posting.message("Hey this is my first Great Tweet!").withUser(jose);
+        Response response = mockPosting.message("Hey this is my first Great Tweet!").withUser(jose);
         Assertions.assertEquals(Response.OK, response);
     }
 
