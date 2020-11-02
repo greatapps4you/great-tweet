@@ -7,5 +7,5 @@ import java.util.List;
 
 public abstract class Wall {
 
-    public abstract List<Message> getMessages(User user);
+    public abstract List<Message> getPostedMessages(User user);
 }

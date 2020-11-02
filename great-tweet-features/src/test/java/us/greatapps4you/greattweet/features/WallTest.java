@@ -20,7 +20,7 @@ class WallTest {
     void setUp() {
         wall = new Wall() {
             @Override
-            public List<Message> getMessages(User user) {
+            public List<Message> getPostedMessages(User user) {
                 List<Message> messages = new ArrayList<>(4);
                 LocalDateTime timePosted = LocalDateTime.of(2020, 10, 31, 15, 0, 0);
                 messages.add(new Message("I am starting to like this", timePosted.plusMinutes(45)));
@@ -38,7 +38,7 @@ class WallTest {
     @Test
     void givenUserThenReturnMessage() {
         User jose = new User("josethedeveloper", "Jose Esteves");
-        List<Message> actual = wall.getMessages(jose);
+        List<Message> actual = wall.getPostedMessages(jose);
         LocalDateTime timePosted = LocalDateTime.of(2020, 10, 31, 15, 0, 0);
         Message expected = new Message("Hey this is my first Great Tweet!", timePosted);
         Assertions.assertEquals(expected, actual.toArray()[3]);
@@ -47,7 +47,7 @@ class WallTest {
     @Test
     void givenUserThenReturnMessagesInReverseChronologicalOrder() {
         User jose = new User("josethedeveloper", "Jose Esteves");
-        List<Message> actual = wall.getMessages(jose);
+        List<Message> actual = wall.getPostedMessages(jose);
         LocalDateTime timePosted = LocalDateTime.of(2020, 10, 31, 15, 0, 0);
 
         Message expectedFirst = new Message("I would love to start following people", timePosted.plusMinutes(60));
