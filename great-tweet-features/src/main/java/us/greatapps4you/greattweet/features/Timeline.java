@@ -1,4 +1,11 @@
 package us.greatapps4you.greattweet.features;
 
-public class Timeline {
+import us.greatapps4you.greattweet.entities.Message;
+import us.greatapps4you.greattweet.entities.User;
+
+import java.util.List;
+
+public abstract class Timeline {
+
+    public abstract List<Message> getFollowingMessages(User jose);
 }
