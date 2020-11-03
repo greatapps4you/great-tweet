@@ -28,12 +28,12 @@ class TimelineTest {
         dataStore = new HashMap<>();
         following = new Following() {
             @Override
-            public String followUser(User me, User followed) {
+            public User followUser(User me, User followed) {
                 if (me.getFollowing() == null) {
                     me.setFollowing(new ArrayList<>());
                 }
                 me.getFollowing().add(followed);
-                return followed.getUniqueName();
+                return followed;
             }
         };
         posting = new Posting() {

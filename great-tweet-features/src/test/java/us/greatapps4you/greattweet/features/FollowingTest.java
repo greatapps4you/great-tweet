@@ -15,12 +15,12 @@ class FollowingTest {
     void setUp() {
         following = new Following() {
             @Override
-            public String followUser(User me, User followed) {
+            public User followUser(User me, User followed) {
                 if (me.getFollowing() == null) {
                     me.setFollowing(new ArrayList<>());
                 }
                 me.getFollowing().add(followed);
-                return followed.getUniqueName();
+                return followed;
             }
         };
     }
@@ -31,11 +31,11 @@ class FollowingTest {
         User emma = new User("emmagic", "Emma Watson");
         User james = new User("jdoe", "James Doe");
 
-        String followedEmma = following.follow(emma).withUser(me);
-        String followedJames = following.follow(james).withUser(me);
+        User followedEmma = following.follow(emma).withUser(me);
+        User followedJames = following.follow(james).withUser(me);
 
-        Assertions.assertEquals("emmagic", followedEmma);
-        Assertions.assertEquals("jdoe", followedJames);
+        Assertions.assertEquals(emma, followedEmma);
+        Assertions.assertEquals(james, followedJames);
 
         Assertions.assertNotNull(me.getFollowing());
         Assertions.assertEquals(2, me.getFollowing().size());

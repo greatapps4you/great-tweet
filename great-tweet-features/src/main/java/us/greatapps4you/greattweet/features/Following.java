@@ -11,9 +11,9 @@ public abstract class Following {
         return this;
     }
 
-    public String withUser(User me) {
+    public User withUser(User me) {
         return this.followUser(me, followed);
     }
 
-    public abstract String followUser(User me, User followed);
+    public abstract User followUser(User me, User followed);
 }
