@@ -34,7 +34,7 @@ public class PostingController {
 
     @PostMapping("/posting")
     public ResponseEntity<EntityModel<Tweet>> postMessage(@RequestBody TweetPostingTO tweetPostingTO) {
-        Tweet tweet = postingService.postMessage(tweetPostingTO.getUniqueName(), tweetPostingTO.getMessage());
+        Tweet tweet = postingService.postMessage(tweetPostingTO.getUser(), tweetPostingTO.getTweet());
         final URI uri =
                 MvcUriComponentsBuilder.fromController(getClass())
                         .path("/messages/{id}")

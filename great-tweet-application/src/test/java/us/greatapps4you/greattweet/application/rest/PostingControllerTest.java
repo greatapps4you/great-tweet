@@ -55,7 +55,7 @@ class PostingControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("content").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("content").value(tweetPostingTO.getMessage()))
+                .andExpect(MockMvcResultMatchers.jsonPath("content").value(tweetPostingTO.getTweet()))
                 .andExpect(MockMvcResultMatchers.jsonPath("id").value(greaterThan(0)))
                 .andExpect(MockMvcResultMatchers.jsonPath("publicationTime").exists());
 

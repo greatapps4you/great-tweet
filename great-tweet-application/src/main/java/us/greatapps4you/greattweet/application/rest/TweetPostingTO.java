@@ -4,20 +4,20 @@ import java.io.Serializable;
 
 public final class TweetPostingTO implements Serializable {
 
-    private final String uniqueName;
-    private final String message;
+    private final String user;
+    private final String tweet;
 
-    public TweetPostingTO(String uniqueName, String message) {
-        this.uniqueName = uniqueName;
-        this.message = message;
+    public TweetPostingTO(String user, String tweet) {
+        this.user = user;
+        this.tweet = tweet;
     }
 
-    public String getUniqueName() {
-        return uniqueName;
+    public String getUser() {
+        return user;
     }
 
-    public String getMessage() {
-        return message;
+    public String getTweet() {
+        return tweet;
     }
 
     @Override
@@ -27,22 +27,22 @@ public final class TweetPostingTO implements Serializable {
 
         TweetPostingTO tweetPostingTO = (TweetPostingTO) o;
 
-        if (!uniqueName.equals(tweetPostingTO.uniqueName)) return false;
-        return message.equals(tweetPostingTO.message);
+        if (!user.equals(tweetPostingTO.user)) return false;
+        return tweet.equals(tweetPostingTO.tweet);
     }
 
     @Override
     public int hashCode() {
-        int result = uniqueName.hashCode();
-        result = 31 * result + message.hashCode();
+        int result = user.hashCode();
+        result = 31 * result + tweet.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return "PostingTO{" +
-                "uniqueName='" + uniqueName + '\'' +
-                ", message='" + message + '\'' +
+        return "TweetPostingTO{" +
+                "user='" + user + '\'' +
+                ", tweet='" + tweet + '\'' +
                 '}';
     }
 }
