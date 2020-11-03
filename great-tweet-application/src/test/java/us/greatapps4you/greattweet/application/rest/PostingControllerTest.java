@@ -13,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import us.greatapps4you.greattweet.entities.User;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -44,11 +43,9 @@ class PostingControllerTest {
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter objectWriter = mapper.writer().withDefaultPrettyPrinter();
 
-        PostingTO postingTO = new PostingTO(
-                new User("josethedeveloper", "Jose Esteves"),
-                "Hi Great Tweet!");
+        MessagePostingTO messagePostingTO = new MessagePostingTO("josethedeveloper", "Hi Great Tweet!");
 
-        String requestJson = objectWriter.writeValueAsString(postingTO);
+        String requestJson = objectWriter.writeValueAsString(messagePostingTO);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/posting")

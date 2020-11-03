@@ -25,10 +25,10 @@ public class PostingController {
 
     @PostMapping("/posting")
     @ResponseBody
-    public ResponseEntity<EntityModel<Message>> postMessage(@RequestBody PostingTO postingTO) {
+    public ResponseEntity<EntityModel<Message>> postMessage(@RequestBody MessagePostingTO messagePostingTO) {
 
         //TODO: Clock, JPA, Creat User
-        Message message = new Message(postingTO.getMessage(), LocalDateTime.now());
+        Message message = new Message(messagePostingTO.getMessage(), LocalDateTime.now());
 
         final URI uri =
                 MvcUriComponentsBuilder.fromController(getClass())
