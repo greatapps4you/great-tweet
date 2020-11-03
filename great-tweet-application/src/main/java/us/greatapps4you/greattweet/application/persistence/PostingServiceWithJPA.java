@@ -24,7 +24,7 @@ public class PostingServiceWithJPA extends Posting {
 
     @Override
     public Tweet postTweet(String uniqueName, String tweet) {
-        //TODO: Separate concerns of User and Tweet in future features
+        //TODO: Separate concerns of User and Tweet when future user features are added
         Tweet postedTweet = new Tweet(tweet, LocalDateTime.now(clockService.CENTRAL_EUROPE()));
         postedTweet = tweetsRepository.save(postedTweet);
         User postingUser = usersRepository.findByUniqueName(uniqueName);
