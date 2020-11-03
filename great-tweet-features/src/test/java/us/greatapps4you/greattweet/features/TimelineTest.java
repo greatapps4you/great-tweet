@@ -32,7 +32,7 @@ class TimelineTest {
                 if (me.getFollowing() == null) {
                     me.setFollowing(new ArrayList<>());
                 }
-                me.getFollowing().add(followed.getUniqueName());
+                me.getFollowing().add(followed);
                 return followed.getUniqueName();
             }
         };
@@ -67,7 +67,7 @@ class TimelineTest {
                 jose.getFollowing().stream().forEach(u -> dataStore.entrySet()
                         .stream()
                         .forEach(e -> {
-                            if (e.getKey().startsWith(u)) {
+                            if (e.getKey().startsWith(u.getUniqueName())) {
                                 followingTweets.add(e.getValue());
                             }
                         }));
