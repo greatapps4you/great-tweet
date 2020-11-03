@@ -32,7 +32,9 @@ public class PostingController {
                 linkTo(methodOn(PostingController.class).serviceStatus()).withSelfRel());
     }
 
-    @PostMapping("/posting")
+    @PostMapping(path = "/posting",
+            consumes = "application/json",
+            produces = "application/hal+json")
     public ResponseEntity<EntityModel<Tweet>> postMessage(@RequestBody TweetPostingTO tweetPostingTO) {
         Tweet tweet = postingService.postMessage(tweetPostingTO.getUser(), tweetPostingTO.getTweet());
         final URI uri =
@@ -42,7 +44,7 @@ public class PostingController {
                         .toUri();
 
         return ResponseEntity.created(uri).body(EntityModel.of(tweet,
-                linkTo(methodOn(PostingController.class).serviceStatus()).withSelfRel()));
+                linkTo(methodOn(MessagesController.class).findById(tweet.getId())).withSelfRel()));
 
     }
 
