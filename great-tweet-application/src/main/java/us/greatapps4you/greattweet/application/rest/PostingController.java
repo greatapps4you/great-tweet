@@ -7,7 +7,6 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import us.greatapps4you.greattweet.application.persistence.PostingServiceWithJPA;
 import us.greatapps4you.greattweet.application.utils.ClockService;
 import us.greatapps4you.greattweet.entities.Message;
-import us.greatapps4you.greattweet.entities.User;
 
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -37,12 +36,7 @@ public class PostingController {
     @PostMapping("/posting")
     @ResponseBody
     public ResponseEntity<EntityModel<Message>> postMessage(@RequestBody MessagePostingTO messagePostingTO) {
-
-        //TODO: Clock, JPA, Creat User
-        Message message = new Message(messagePostingTO.getMessage(), LocalDateTime.now(clockService.CENTRAL_EUROPE()));
-
-        User user = new User(messagePostingTO.getUniqueName(), messagePostingTO.getUniqueName());
-
+        Message message = postingService.postMessage(messagePostingTO.getUniqueName(), messagePostingTO.getMessage());
         final URI uri =
                 MvcUriComponentsBuilder.fromController(getClass())
                         .path("/{id}")
