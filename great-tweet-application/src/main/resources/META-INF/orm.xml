@@ -8,13 +8,13 @@ http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
     <description>GreatTweet Entities</description>
     <package>us.greatapps4you.greattweet.entities</package>
 
-    <entity class="us.greatapps4you.greattweet.entities.Tweet" name="Country">
-        <table name="MESSAGE"/>
+    <entity class="us.greatapps4you.greattweet.entities.Tweet" name="Tweet">
+        <table name="TWEET"/>
         <attributes>
 
             <id name="id">
-                <generated-value strategy="SEQUENCE" generator="msg-generator"/>
-                <sequence-generator name="msg-generator" sequence-name="MSG_SEQ"/>
+                <generated-value strategy="SEQUENCE" generator="tweet-generator"/>
+                <sequence-generator name="tweet-generator" sequence-name="MSG_SEQ"/>
             </id>
 
             <basic name="content">
@@ -22,7 +22,7 @@ http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
             </basic>
 
             <basic name="publicationTime">
-                <column name="PUB_DATE" length="100"/>
+                <column name="PUB_TIME" length="32"/>
             </basic>
         </attributes>
     </entity>
