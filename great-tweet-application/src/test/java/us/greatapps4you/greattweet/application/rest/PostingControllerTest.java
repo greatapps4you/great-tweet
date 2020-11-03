@@ -25,7 +25,7 @@ class PostingControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void whenPostMessage_ThenReturnCreated() throws Exception {
+    void whenPostTweet_ThenReturnCreated() throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);

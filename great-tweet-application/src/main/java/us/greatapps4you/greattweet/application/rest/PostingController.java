@@ -28,16 +28,17 @@ public class PostingController {
     @PostMapping(path = "/posting",
             consumes = "application/json",
             produces = "application/hal+json")
-    public ResponseEntity<EntityModel<Tweet>> postMessage(@RequestBody TweetPostingTO tweetPostingTO) {
-        Tweet tweet = postingService.postMessage(tweetPostingTO.getUser(), tweetPostingTO.getTweet());
+    public ResponseEntity<EntityModel<Tweet>> postTweet(@RequestBody TweetPostingTO tweetPostingTO) {
+        Tweet tweet = postingService.postTweet(tweetPostingTO.getUser(), tweetPostingTO.getTweet());
         final URI uri =
                 MvcUriComponentsBuilder.fromController(getClass())
-                        .path("/messages/{id}")
+                        .path("/tweets/{id}")
                         .buildAndExpand(tweet.getId())
                         .toUri();
 
-        return ResponseEntity.created(uri).body(EntityModel.of(tweet,
-                linkTo(methodOn(MessagesController.class).findById(tweet.getId())).withSelfRel()));
+        return ResponseEntity.created(uri)
+                .body(EntityModel.of(tweet,
+                linkTo(methodOn(TweetsController.class).findById(tweet.getId())).withSelfRel()));
 
     }
 
