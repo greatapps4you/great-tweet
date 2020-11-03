@@ -15,8 +15,8 @@ class TimelineTest {
 
     public static final Clock DEFAULT_CLOCK = Clock.system(ZoneId.of("Europe/Paris"));
     private Timeline timeline;
-    private User jose;
     private Following following;
+    private User jose;
     private User emma;
     private User james;
     private Posting posting;
@@ -38,9 +38,9 @@ class TimelineTest {
         };
         posting = new Posting() {
             @Override
-            public Message postMessage(User user, String message) {
+            public Message postMessage(String user, String message) {
                 Message postedMessage = new Message(message, LocalDateTime.now(DEFAULT_CLOCK));
-                String key = user.getUniqueName() + "_" + postedMessage.getPublicationTime();
+                String key = user + "_" + postedMessage.getPublicationTime();
                 dataStore.put(key, postedMessage);
                 return dataStore.get(key);
             }
@@ -53,11 +53,11 @@ class TimelineTest {
         following.follow(emma).withUser(jose);
         following.follow(james).withUser(jose);
 
-        posting.tweet("I am happy with my new Movie").withUser(emma);
-        posting.tweet("Thanks for your support").withUser(emma);
+        posting.tweet("I am happy with my new Movie").withUser(emma.getUniqueName());
+        posting.tweet("Thanks for your support").withUser(emma.getUniqueName());
 
-        posting.tweet("Hey guys I am doeing good LOL").withUser(james);
-        posting.tweet("Just came to say hello").withUser(james);
+        posting.tweet("Hey guys I am doeing good LOL").withUser(james.getUniqueName());
+        posting.tweet("Just came to say hello").withUser(james.getUniqueName());
 
         timeline = new Timeline() {
             @Override

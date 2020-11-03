@@ -17,7 +17,7 @@ class PostingTest {
     void setUp() {
         posting = new Posting() {
             @Override
-            public Message postMessage(User user, String message) {
+            public Message postMessage(String user, String message) {
                 return new Message("Hey this is my first Great Tweet!", postingTime);
             }
         };
@@ -25,14 +25,14 @@ class PostingTest {
 
     @Test
     void givenUserAndMessageThenReturnOk() {
-        User jose = new User("josethedeveloper", "Jose Esteves");
+        String givenUser = "josethedeveloper";
         String givenMessage = "Hey this is my first Great Tweet!";
 
         Message expected = new Message(givenMessage, postingTime);
 
         Message actual = posting
                 .tweet(givenMessage)
-                .withUser(jose);
+                .withUser(givenUser);
 
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(expected, actual);
