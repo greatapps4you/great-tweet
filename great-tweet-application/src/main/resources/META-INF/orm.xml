@@ -27,4 +27,28 @@ http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
         </attributes>
     </entity>
 
+    <entity class="us.greatapps4you.greattweet.entities.User" name="User">
+        <table name="GREAT_TWEET_USER"/>
+        <attributes>
+
+            <id name="id">
+                <generated-value strategy="SEQUENCE" generator="user-generator"/>
+                <sequence-generator name="user-generator" sequence-name="USR_SEQ"/>
+            </id>
+
+            <basic name="uniqueName">
+                <column name="UN_NAME" length="32"/>
+            </basic>
+
+            <basic name="name">
+                <column name="NAME" length="64"/>
+            </basic>
+
+            <one-to-many name="following" target-entity="User"/>
+
+            <one-to-many name="tweets" target-entity="Tweet"/>
+        </attributes>
+    </entity>
+
 </entity-mappings>
+
