@@ -2,17 +2,17 @@ package us.greatapps4you.greattweet.entities;
 
 import java.time.LocalDateTime;
 
-public class Message {
+public class Tweet {
     private int id;
     private String content;
     private LocalDateTime publicationTime;
 
-    public Message(String content, LocalDateTime publicationTime) {
+    public Tweet(String content, LocalDateTime publicationTime) {
         this.content = content;
         this.publicationTime = publicationTime;
     }
 
-    public Message() {
+    public Tweet() {
     }
 
     public int getId() {
@@ -44,10 +44,10 @@ public class Message {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Message message = (Message) o;
+        Tweet tweet = (Tweet) o;
 
-        if (!content.equals(message.content)) return false;
-        return publicationTime.equals(message.publicationTime);
+        if (!content.equals(tweet.content)) return false;
+        return publicationTime.equals(tweet.publicationTime);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" +
+        return "Tweet{" +
                 "content='" + content + '\'' +
                 ", publicationTime=" + publicationTime +
                 '}';

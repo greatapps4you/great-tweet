@@ -2,12 +2,12 @@ package us.greatapps4you.greattweet.application.rest;
 
 import java.io.Serializable;
 
-public final class MessagePostingTO implements Serializable {
+public final class TweetPostingTO implements Serializable {
 
     private final String uniqueName;
     private final String message;
 
-    public MessagePostingTO(String uniqueName, String message) {
+    public TweetPostingTO(String uniqueName, String message) {
         this.uniqueName = uniqueName;
         this.message = message;
     }
@@ -25,10 +25,10 @@ public final class MessagePostingTO implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MessagePostingTO messagePostingTO = (MessagePostingTO) o;
+        TweetPostingTO tweetPostingTO = (TweetPostingTO) o;
 
-        if (!uniqueName.equals(messagePostingTO.uniqueName)) return false;
-        return message.equals(messagePostingTO.message);
+        if (!uniqueName.equals(tweetPostingTO.uniqueName)) return false;
+        return message.equals(tweetPostingTO.message);
     }
 
     @Override

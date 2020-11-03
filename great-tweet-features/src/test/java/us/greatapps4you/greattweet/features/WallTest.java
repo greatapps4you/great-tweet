@@ -3,7 +3,7 @@ package us.greatapps4you.greattweet.features;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import us.greatapps4you.greattweet.entities.Message;
+import us.greatapps4you.greattweet.entities.Tweet;
 import us.greatapps4you.greattweet.entities.User;
 
 import java.time.LocalDateTime;
@@ -20,17 +20,17 @@ class WallTest {
     void setUp() {
         wall = new Wall() {
             @Override
-            public List<Message> getPostedMessages(User user) {
-                List<Message> messages = new ArrayList<>(4);
+            public List<Tweet> getPostedMessages(User user) {
+                List<Tweet> tweets = new ArrayList<>(4);
                 LocalDateTime timePosted = LocalDateTime.of(2020, 10, 31, 15, 0, 0);
-                messages.add(new Message("I am starting to like this", timePosted.plusMinutes(45)));
-                messages.add(new Message("This is my second Tweet", timePosted.plusMinutes(35)));
-                messages.add(new Message("Hey this is my first Great Tweet!", timePosted));
-                messages.add(new Message("I would love to start following people", timePosted.plusMinutes(60)));
+                tweets.add(new Tweet("I am starting to like this", timePosted.plusMinutes(45)));
+                tweets.add(new Tweet("This is my second Tweet", timePosted.plusMinutes(35)));
+                tweets.add(new Tweet("Hey this is my first Great Tweet!", timePosted));
+                tweets.add(new Tweet("I would love to start following people", timePosted.plusMinutes(60)));
 
-                Collections.sort(messages, Comparator.comparing(Message::getPublicationTime).reversed());
+                Collections.sort(tweets, Comparator.comparing(Tweet::getPublicationTime).reversed());
 
-                return messages;
+                return tweets;
             }
         };
     }
@@ -38,22 +38,22 @@ class WallTest {
     @Test
     void givenUserThenReturnMessage() {
         User jose = new User("josethedeveloper", "Jose Esteves");
-        List<Message> actual = wall.getPostedMessages(jose);
+        List<Tweet> actual = wall.getPostedMessages(jose);
         LocalDateTime timePosted = LocalDateTime.of(2020, 10, 31, 15, 0, 0);
-        Message expected = new Message("Hey this is my first Great Tweet!", timePosted);
+        Tweet expected = new Tweet("Hey this is my first Great Tweet!", timePosted);
         Assertions.assertEquals(expected, actual.toArray()[3]);
     }
 
     @Test
     void givenUserThenReturnMessagesInReverseChronologicalOrder() {
         User jose = new User("josethedeveloper", "Jose Esteves");
-        List<Message> actual = wall.getPostedMessages(jose);
+        List<Tweet> actual = wall.getPostedMessages(jose);
         LocalDateTime timePosted = LocalDateTime.of(2020, 10, 31, 15, 0, 0);
 
-        Message expectedFirst = new Message("I would love to start following people", timePosted.plusMinutes(60));
-        Message expectedSecond = new Message("I am starting to like this", timePosted.plusMinutes(45));
-        Message expectedThird = new Message("This is my second Tweet", timePosted.plusMinutes(35));
-        Message expectedFourth = new Message("Hey this is my first Great Tweet!", timePosted);
+        Tweet expectedFirst = new Tweet("I would love to start following people", timePosted.plusMinutes(60));
+        Tweet expectedSecond = new Tweet("I am starting to like this", timePosted.plusMinutes(45));
+        Tweet expectedThird = new Tweet("This is my second Tweet", timePosted.plusMinutes(35));
+        Tweet expectedFourth = new Tweet("Hey this is my first Great Tweet!", timePosted);
 
 
         Assertions.assertEquals(expectedFirst, actual.toArray()[0]);

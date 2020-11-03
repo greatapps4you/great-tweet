@@ -3,7 +3,7 @@ package us.greatapps4you.greattweet.features;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import us.greatapps4you.greattweet.entities.Message;
+import us.greatapps4you.greattweet.entities.Tweet;
 import us.greatapps4you.greattweet.entities.User;
 
 import java.time.Clock;
@@ -20,7 +20,7 @@ class TimelineTest {
     private User emma;
     private User james;
     private Posting posting;
-    private Map<String, Message> dataStore;
+    private Map<String, Tweet> dataStore;
 
     @BeforeEach
     void setUp() {
@@ -38,10 +38,10 @@ class TimelineTest {
         };
         posting = new Posting() {
             @Override
-            public Message postMessage(String user, String message) {
-                Message postedMessage = new Message(message, LocalDateTime.now(DEFAULT_CLOCK));
-                String key = user + "_" + postedMessage.getPublicationTime();
-                dataStore.put(key, postedMessage);
+            public Tweet postMessage(String user, String message) {
+                Tweet postedTweet = new Tweet(message, LocalDateTime.now(DEFAULT_CLOCK));
+                String key = user + "_" + postedTweet.getPublicationTime();
+                dataStore.put(key, postedTweet);
                 return dataStore.get(key);
             }
         };
@@ -61,18 +61,18 @@ class TimelineTest {
 
         timeline = new Timeline() {
             @Override
-            public List<Message> getFollowingMessages(User jose) {
-                List<Message> followingMessages = new ArrayList<>();
+            public List<Tweet> getFollowingMessages(User jose) {
+                List<Tweet> followingTweets = new ArrayList<>();
 
                 jose.getFollowing().stream().forEach(u -> dataStore.entrySet()
                         .stream()
                         .forEach(e -> {
                             if (e.getKey().startsWith(u)) {
-                                followingMessages.add(e.getValue());
+                                followingTweets.add(e.getValue());
                             }
                         }));
-                Collections.sort(followingMessages, Comparator.comparing(Message::getPublicationTime).reversed());
-                return followingMessages;
+                Collections.sort(followingTweets, Comparator.comparing(Tweet::getPublicationTime).reversed());
+                return followingTweets;
             }
         };
 
@@ -80,17 +80,17 @@ class TimelineTest {
 
     @Test
     void givenUserThenReturnFollowingMessagesInReverseChronologicalOrder() {
-        List<Message> actual = timeline.getFollowingMessages(jose);
+        List<Tweet> actual = timeline.getFollowingMessages(jose);
 
         String expectedFirst = "Just came to say hello";
         String expectedSecond = "Hey guys I am doeing good LOL";
         String expectedThird = "Thanks for your support";
         String expectedFourth = "I am happy with my new Movie";
 
-        Assertions.assertEquals(expectedFirst, ((Message)actual.toArray()[0]).getContent());
-        Assertions.assertEquals(expectedSecond, ((Message)actual.toArray()[1]).getContent());
-        Assertions.assertEquals(expectedThird, ((Message)actual.toArray()[2]).getContent());
-        Assertions.assertEquals(expectedFourth, ((Message)actual.toArray()[3]).getContent());
+        Assertions.assertEquals(expectedFirst, ((Tweet)actual.toArray()[0]).getContent());
+        Assertions.assertEquals(expectedSecond, ((Tweet)actual.toArray()[1]).getContent());
+        Assertions.assertEquals(expectedThird, ((Tweet)actual.toArray()[2]).getContent());
+        Assertions.assertEquals(expectedFourth, ((Tweet)actual.toArray()[3]).getContent());
 
     }
 

@@ -7,7 +7,7 @@ public class User {
     private String uniqueName;
     private String name;
     private List<String> following;
-    private List<Message> messages;
+    private List<Tweet> tweets;
 
     public User(String uniqueName, String name) {
         this.uniqueName = uniqueName;
@@ -49,12 +49,12 @@ public class User {
         this.following = following;
     }
 
-    public List<Message> getMessages() {
-        return messages;
+    public List<Tweet> getMessages() {
+        return tweets;
     }
 
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
+    public void setMessages(List<Tweet> tweets) {
+        this.tweets = tweets;
     }
 
     @Override

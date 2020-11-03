@@ -1,6 +1,6 @@
 package us.greatapps4you.greattweet.features;
 
-import us.greatapps4you.greattweet.entities.Message;
+import us.greatapps4you.greattweet.entities.Tweet;
 
 public abstract class Posting {
 
@@ -11,9 +11,9 @@ public abstract class Posting {
         return this;
     }
 
-    public Message withUser(String user) {
+    public Tweet withUser(String user) {
         return this.postMessage(user, this.message);
     }
 
-    public abstract Message postMessage(String user, String message);
+    public abstract Tweet postMessage(String user, String message);
 }
