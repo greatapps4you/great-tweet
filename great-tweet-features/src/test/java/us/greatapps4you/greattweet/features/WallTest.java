@@ -20,7 +20,7 @@ class WallTest {
     void setUp() {
         wall = new Wall() {
             @Override
-            public List<Tweet> getPostedMessages(User user) {
+            public List<Tweet> getPostedTweets(User user) {
                 List<Tweet> tweets = new ArrayList<>(4);
                 LocalDateTime timePosted = LocalDateTime.of(2020, 10, 31, 15, 0, 0);
                 tweets.add(new Tweet("I am starting to like this", timePosted.plusMinutes(45)));
@@ -36,18 +36,18 @@ class WallTest {
     }
 
     @Test
-    void givenUserThenReturnMessage() {
+    void givenUserThenReturnTweet() {
         User jose = new User("josethedeveloper", "Jose Esteves");
-        List<Tweet> actual = wall.getPostedMessages(jose);
+        List<Tweet> actual = wall.getPostedTweets(jose);
         LocalDateTime timePosted = LocalDateTime.of(2020, 10, 31, 15, 0, 0);
         Tweet expected = new Tweet("Hey this is my first Great Tweet!", timePosted);
         Assertions.assertEquals(expected, actual.toArray()[3]);
     }
 
     @Test
-    void givenUserThenReturnMessagesInReverseChronologicalOrder() {
+    void givenUser_ThenReturnTweetsInReverseChronologicalOrder() {
         User jose = new User("josethedeveloper", "Jose Esteves");
-        List<Tweet> actual = wall.getPostedMessages(jose);
+        List<Tweet> actual = wall.getPostedTweets(jose);
         LocalDateTime timePosted = LocalDateTime.of(2020, 10, 31, 15, 0, 0);
 
         Tweet expectedFirst = new Tweet("I would love to start following people", timePosted.plusMinutes(60));

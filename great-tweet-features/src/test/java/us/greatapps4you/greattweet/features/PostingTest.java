@@ -16,21 +16,21 @@ class PostingTest {
     void setUp() {
         posting = new Posting() {
             @Override
-            public Tweet postMessage(String user, String message) {
+            public Tweet postTweet(String user, String tweet) {
                 return new Tweet("Hey this is my first Great Tweet!", postingTime);
             }
         };
     }
 
     @Test
-    void givenUserAndMessageThenReturnOk() {
+    void givenUserAndTweetThenReturnOk() {
         String givenUser = "josethedeveloper";
-        String givenMessage = "Hey this is my first Great Tweet!";
+        String givenTweet = "Hey this is my first Great Tweet!";
 
-        Tweet expected = new Tweet(givenMessage, postingTime);
+        Tweet expected = new Tweet(givenTweet, postingTime);
 
         Tweet actual = posting
-                .tweet(givenMessage)
+                .tweet(givenTweet)
                 .withUser(givenUser);
 
         Assertions.assertNotNull(actual);

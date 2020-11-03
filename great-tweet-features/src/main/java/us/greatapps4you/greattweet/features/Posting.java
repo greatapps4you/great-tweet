@@ -4,16 +4,16 @@ import us.greatapps4you.greattweet.entities.Tweet;
 
 public abstract class Posting {
 
-    private String message;
+    private String tweet;
 
-    public Posting tweet(String message) {
-        this.message = message;
+    public Posting tweet(String tweet) {
+        this.tweet = tweet;
         return this;
     }
 
     public Tweet withUser(String user) {
-        return this.postMessage(user, this.message);
+        return this.postTweet(user, this.tweet);
     }
 
-    public abstract Tweet postMessage(String user, String message);
+    public abstract Tweet postTweet(String user, String tweet);
 }

@@ -38,8 +38,8 @@ class TimelineTest {
         };
         posting = new Posting() {
             @Override
-            public Tweet postMessage(String user, String message) {
-                Tweet postedTweet = new Tweet(message, LocalDateTime.now(DEFAULT_CLOCK));
+            public Tweet postTweet(String user, String tweet) {
+                Tweet postedTweet = new Tweet(tweet, LocalDateTime.now(DEFAULT_CLOCK));
                 String key = user + "_" + postedTweet.getPublicationTime();
                 dataStore.put(key, postedTweet);
                 return dataStore.get(key);
@@ -61,7 +61,7 @@ class TimelineTest {
 
         timeline = new Timeline() {
             @Override
-            public List<Tweet> getFollowingMessages(User jose) {
+            public List<Tweet> getFollowingTweets(User jose) {
                 List<Tweet> followingTweets = new ArrayList<>();
 
                 jose.getFollowing().stream().forEach(u -> dataStore.entrySet()
@@ -79,8 +79,8 @@ class TimelineTest {
     }
 
     @Test
-    void givenUserThenReturnFollowingMessagesInReverseChronologicalOrder() {
-        List<Tweet> actual = timeline.getFollowingMessages(jose);
+    void givenUserThenReturnFollowingTweetsInReverseChronologicalOrder() {
+        List<Tweet> actual = timeline.getFollowingTweets(jose);
 
         String expectedFirst = "Just came to say hello";
         String expectedSecond = "Hey guys I am doeing good LOL";

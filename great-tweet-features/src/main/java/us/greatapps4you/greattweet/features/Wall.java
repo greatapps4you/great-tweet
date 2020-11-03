@@ -7,5 +7,5 @@ import java.util.List;
 
 public abstract class Wall {
 
-    public abstract List<Tweet> getPostedMessages(User user);
+    public abstract List<Tweet> getPostedTweets(User user);
 }
