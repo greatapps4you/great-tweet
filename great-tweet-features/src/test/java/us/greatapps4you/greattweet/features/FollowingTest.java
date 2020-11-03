@@ -19,7 +19,7 @@ class FollowingTest {
                 if (me.getFollowing() == null) {
                     me.setFollowing(new ArrayList<>());
                 }
-                me.getFollowing().add(followed.getUniqueName());
+                me.getFollowing().add(followed);
                 return followed.getUniqueName();
             }
         };

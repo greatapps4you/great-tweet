@@ -6,7 +6,7 @@ public class User {
     private int id;
     private String uniqueName;
     private String name;
-    private List<String> following;
+    private User following;
     private List<Tweet> tweets;
 
     public User(String uniqueName, String name) {
@@ -41,11 +41,11 @@ public class User {
         this.name = name;
     }
 
-    public List<String> getFollowing() {
+    public User getFollowing() {
         return following;
     }
 
-    public void setFollowing(List<String> following) {
+    public void setFollowing(User following) {
         this.following = following;
     }
 
