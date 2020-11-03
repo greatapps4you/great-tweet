@@ -38,11 +38,11 @@ class TimelineTest {
         };
         posting = new Posting() {
             @Override
-            public String postMessage(User user, String message) {
+            public Message postMessage(User user, String message) {
                 Message postedMessage = new Message(message, LocalDateTime.now(DEFAULT_CLOCK));
                 String key = user.getUniqueName() + "_" + postedMessage.getPublicationTime();
                 dataStore.put(key, postedMessage);
-                return dataStore.get(key).getContent();
+                return dataStore.get(key);
             }
         };
 

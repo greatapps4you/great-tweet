@@ -4,7 +4,10 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import us.greatapps4you.greattweet.application.persistence.PostingServiceWithJPA;
+import us.greatapps4you.greattweet.application.utils.ClockService;
 import us.greatapps4you.greattweet.entities.Message;
+import us.greatapps4you.greattweet.entities.User;
 
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -16,10 +19,18 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RequestMapping("/api")
 public class PostingController {
 
+    private final ClockService clockService;
+    private final PostingServiceWithJPA postingService;
+
+    public PostingController(ClockService clockService, PostingServiceWithJPA postingService) {
+        this.clockService = clockService;
+        this.postingService = postingService;
+    }
+
     @GetMapping("/posting")
     @ResponseBody
     public EntityModel serviceStatus() {
-        return EntityModel.of(new Message("OK", LocalDateTime.now()),
+        return EntityModel.of(new Message("OK", LocalDateTime.now(clockService.CENTRAL_EUROPE())),
                 linkTo(methodOn(PostingController.class).serviceStatus()).withSelfRel());
     }
 
@@ -28,7 +39,9 @@ public class PostingController {
     public ResponseEntity<EntityModel<Message>> postMessage(@RequestBody MessagePostingTO messagePostingTO) {
 
         //TODO: Clock, JPA, Creat User
-        Message message = new Message(messagePostingTO.getMessage(), LocalDateTime.now());
+        Message message = new Message(messagePostingTO.getMessage(), LocalDateTime.now(clockService.CENTRAL_EUROPE()));
+
+        User user = new User(messagePostingTO.getUniqueName(), messagePostingTO.getUniqueName());
 
         final URI uri =
                 MvcUriComponentsBuilder.fromController(getClass())

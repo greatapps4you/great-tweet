@@ -44,7 +44,6 @@ class PostingControllerTest {
         ObjectWriter objectWriter = mapper.writer().withDefaultPrettyPrinter();
 
         MessagePostingTO messagePostingTO = new MessagePostingTO("josethedeveloper", "Hi Great Tweet!");
-
         String requestJson = objectWriter.writeValueAsString(messagePostingTO);
 
         mockMvc.perform(MockMvcRequestBuilders

@@ -3,18 +3,22 @@ package us.greatapps4you.greattweet.features;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import us.greatapps4you.greattweet.entities.Message;
 import us.greatapps4you.greattweet.entities.User;
+
+import java.time.LocalDateTime;
 
 class PostingTest {
 
     private Posting posting;
+    private LocalDateTime postingTime = LocalDateTime.of(2020, 11, 03, 9, 9, 0);
 
     @BeforeEach
     void setUp() {
         posting = new Posting() {
             @Override
-            public String postMessage(User user, String message) {
-                return "Hey this is my first Great Tweet!";
+            public Message postMessage(User user, String message) {
+                return new Message("Hey this is my first Great Tweet!", postingTime);
             }
         };
     }
@@ -22,11 +26,16 @@ class PostingTest {
     @Test
     void givenUserAndMessageThenReturnOk() {
         User jose = new User("josethedeveloper", "Jose Esteves");
-        String message = "Hey this is my first Great Tweet!";
-        String result = posting
-                .tweet(message)
+        String givenMessage = "Hey this is my first Great Tweet!";
+
+        Message expected = new Message(givenMessage, postingTime);
+
+        Message actual = posting
+                .tweet(givenMessage)
                 .withUser(jose);
-        Assertions.assertEquals(message, result);
+
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(expected, actual);
     }
 
 
