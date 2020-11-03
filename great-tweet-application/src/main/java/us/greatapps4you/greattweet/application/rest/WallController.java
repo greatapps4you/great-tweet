@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import us.greatapps4you.greattweet.application.persistence.UsersRepository;
 import us.greatapps4you.greattweet.entities.Tweet;
+import us.greatapps4you.greattweet.entities.User;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -29,15 +31,20 @@ public class WallController {
 
     @GetMapping("/wall/{uniqueName}")
     CollectionModel<EntityModel<Tweet>> findByUserUniqueName(@PathVariable String uniqueName) {
-        List<EntityModel<Tweet>> tweets = repository.findByUniqueName(uniqueName).getTweets()
-                .stream()
-                .map(tweet -> EntityModel.of(tweet,
-                        linkTo(methodOn(TweetsController.class).findById(tweet.getId())).withSelfRel()))
-                .collect(Collectors.toList());
-
-        //Reverse the List chronologically
-        Collections.sort(tweets,
-                Comparator.comparing((EntityModel e) -> ((Tweet)e.getContent()).getPublicationTime()).reversed());
+        User user = repository.findByUniqueName(uniqueName);
+        List<EntityModel<Tweet>> tweets;
+        if(user == null) {
+            tweets = new ArrayList<>();
+        } else {
+            tweets = user.getTweets()
+                    .stream()
+                    .map(tweet -> EntityModel.of(tweet,
+                            linkTo(methodOn(TweetsController.class).findById(tweet.getId())).withSelfRel()))
+                    .collect(Collectors.toList());
+            //Reverse the List chronologically
+            Collections.sort(tweets,
+                    Comparator.comparing((EntityModel e) -> ((Tweet)e.getContent()).getPublicationTime()).reversed());
+        }
 
         return CollectionModel.of(tweets, linkTo(methodOn(WallController.class).findByUserUniqueName(uniqueName))
                 .withSelfRel());
