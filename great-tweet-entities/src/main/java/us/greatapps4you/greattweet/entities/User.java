@@ -15,6 +15,7 @@ public class User {
     }
 
     public User() {
+
     }
 
     public int getId() {
@@ -49,11 +50,11 @@ public class User {
         this.following = following;
     }
 
-    public List<Tweet> getMessages() {
+    public List<Tweet> getTweets() {
         return tweets;
     }
 
-    public void setMessages(List<Tweet> tweets) {
+    public void setTweets(List<Tweet> tweets) {
         this.tweets = tweets;
     }
 

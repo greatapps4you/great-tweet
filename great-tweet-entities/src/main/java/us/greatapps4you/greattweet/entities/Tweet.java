@@ -13,6 +13,7 @@ public class Tweet {
     }
 
     public Tweet() {
+
     }
 
     public int getId() {
