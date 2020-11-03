@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -43,8 +44,8 @@ class PostingControllerTest {
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter objectWriter = mapper.writer().withDefaultPrettyPrinter();
 
-        MessagePostingTO messagePostingTO = new MessagePostingTO("josethedeveloper", "Hi Great Tweet!");
-        String requestJson = objectWriter.writeValueAsString(messagePostingTO);
+        TweetPostingTO tweetPostingTO = new TweetPostingTO("josethedeveloper", "Hi Great Tweet!");
+        String requestJson = objectWriter.writeValueAsString(tweetPostingTO);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/posting")
@@ -53,7 +54,10 @@ class PostingControllerTest {
                 .accept(MediaTypes.HAL_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("content").exists());
+                .andExpect(MockMvcResultMatchers.jsonPath("content").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("content").value(tweetPostingTO.getMessage()))
+                .andExpect(MockMvcResultMatchers.jsonPath("id").value(greaterThan(0)))
+                .andExpect(MockMvcResultMatchers.jsonPath("publicationTime").exists());
 
     }
 

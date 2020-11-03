@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import us.greatapps4you.greattweet.application.persistence.PostingServiceWithJPA;
 import us.greatapps4you.greattweet.application.utils.ClockService;
-import us.greatapps4you.greattweet.entities.Message;
+import us.greatapps4you.greattweet.entities.Tweet;
 
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -27,23 +27,21 @@ public class PostingController {
     }
 
     @GetMapping("/posting")
-    @ResponseBody
     public EntityModel serviceStatus() {
-        return EntityModel.of(new Message("OK", LocalDateTime.now(clockService.CENTRAL_EUROPE())),
+        return EntityModel.of(new Tweet("OK", LocalDateTime.now(clockService.CENTRAL_EUROPE())),
                 linkTo(methodOn(PostingController.class).serviceStatus()).withSelfRel());
     }
 
     @PostMapping("/posting")
-    @ResponseBody
-    public ResponseEntity<EntityModel<Message>> postMessage(@RequestBody MessagePostingTO messagePostingTO) {
-        Message message = postingService.postMessage(messagePostingTO.getUniqueName(), messagePostingTO.getMessage());
+    public ResponseEntity<EntityModel<Tweet>> postMessage(@RequestBody TweetPostingTO tweetPostingTO) {
+        Tweet tweet = postingService.postMessage(tweetPostingTO.getUniqueName(), tweetPostingTO.getMessage());
         final URI uri =
                 MvcUriComponentsBuilder.fromController(getClass())
-                        .path("/{id}")
-                        .buildAndExpand(message.getId())
+                        .path("/messages/{id}")
+                        .buildAndExpand(tweet.getId())
                         .toUri();
 
-        return ResponseEntity.created(uri).body(EntityModel.of(message,
+        return ResponseEntity.created(uri).body(EntityModel.of(tweet,
                 linkTo(methodOn(PostingController.class).serviceStatus()).withSelfRel()));
 
     }

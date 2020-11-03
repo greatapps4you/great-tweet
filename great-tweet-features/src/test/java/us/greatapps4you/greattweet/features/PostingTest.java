@@ -3,8 +3,7 @@ package us.greatapps4you.greattweet.features;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import us.greatapps4you.greattweet.entities.Message;
-import us.greatapps4you.greattweet.entities.User;
+import us.greatapps4you.greattweet.entities.Tweet;
 
 import java.time.LocalDateTime;
 
@@ -17,8 +16,8 @@ class PostingTest {
     void setUp() {
         posting = new Posting() {
             @Override
-            public Message postMessage(String user, String message) {
-                return new Message("Hey this is my first Great Tweet!", postingTime);
+            public Tweet postMessage(String user, String message) {
+                return new Tweet("Hey this is my first Great Tweet!", postingTime);
             }
         };
     }
@@ -28,9 +27,9 @@ class PostingTest {
         String givenUser = "josethedeveloper";
         String givenMessage = "Hey this is my first Great Tweet!";
 
-        Message expected = new Message(givenMessage, postingTime);
+        Tweet expected = new Tweet(givenMessage, postingTime);
 
-        Message actual = posting
+        Tweet actual = posting
                 .tweet(givenMessage)
                 .withUser(givenUser);
 
