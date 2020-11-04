@@ -1,7 +1,7 @@
 # great-tweet
 Twitter like Social Network
 
-#Building
+# Building
 1 - Build the great-tweet-entities project with maven
     clean install
 
@@ -11,12 +11,12 @@ Twitter like Social Network
 3 - Build the great-tweet-application project with maven
     clean package
 
-#Running
+# Running
 Run the resulting executable Jar from great-tweet-application from the command line:
 
 java -jar great-tweet-application-1.0-SNAPSHOT.jar
 
-#Posting Messages
+# Posting Messages
 
 Using Postmann or curl send a POST request to the URL:
 localhost:8080/api/posting
