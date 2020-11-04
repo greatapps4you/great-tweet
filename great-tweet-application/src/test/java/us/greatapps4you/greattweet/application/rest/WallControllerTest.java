@@ -37,7 +37,6 @@ class WallControllerTest {
 
     @Test
     void givenUser_ThenReturnTweets() throws Exception {
-        //TODO Post more tweets here and assert the outcome
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter objectWriter = mapper.writer().withDefaultPrettyPrinter();
