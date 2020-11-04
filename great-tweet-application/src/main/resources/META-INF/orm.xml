@@ -44,9 +44,9 @@ http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
                 <column name="NAME" length="64"/>
             </basic>
 
-            <one-to-many name="following" target-entity="User"/>
+            <one-to-many name="following" fetch="EAGER" target-entity="User"/>
 
-            <one-to-many name="tweets" target-entity="Tweet"/>
+            <one-to-many name="tweets" fetch="EAGER" target-entity="Tweet"/>
         </attributes>
     </entity>
 
