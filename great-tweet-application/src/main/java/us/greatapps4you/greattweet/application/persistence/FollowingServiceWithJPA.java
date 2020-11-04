@@ -27,8 +27,10 @@ public class FollowingServiceWithJPA extends Following {
         if(me.getFollowing() == null) {
             me.setFollowing(new ArrayList<>());
         }
-        me.getFollowing().add(followed);
-        usersRepository.save(me);
+        if(!me.getFollowing().contains(followed)) {
+            me.getFollowing().add(followed);
+            usersRepository.save(me);
+        }
         return followed;
     }
 }
