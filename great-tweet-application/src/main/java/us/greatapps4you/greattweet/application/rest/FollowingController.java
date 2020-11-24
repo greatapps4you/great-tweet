@@ -23,7 +23,7 @@ public class FollowingController {
             consumes = "application/json",
             produces = "application/hal+json")
     public ResponseEntity<EntityModel<User>> followUser(@RequestBody User me, @PathVariable String followed) {
-        User followedUser = followingService.followUser(me, new User(followed, followed));
+        User followedUser = followingService.follow(new User(followed, followed)).withUser(me);
         if (followedUser == null) {
             return ResponseEntity.notFound().build();
         } else {
