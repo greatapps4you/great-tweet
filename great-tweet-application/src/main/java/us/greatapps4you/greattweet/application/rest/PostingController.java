@@ -29,7 +29,7 @@ public class PostingController {
             consumes = "application/json",
             produces = "application/hal+json")
     public ResponseEntity<EntityModel<Tweet>> postTweet(@RequestBody TweetPostingTO tweetPostingTO) {
-        Tweet tweet = postingService.postTweet(tweetPostingTO.getUser(), tweetPostingTO.getTweet());
+        Tweet tweet = postingService.tweet(tweetPostingTO.getTweet()).withUser(tweetPostingTO.getUser());
         final URI uri =
                 MvcUriComponentsBuilder.fromController(getClass())
                         .path("/tweets/{id}")
