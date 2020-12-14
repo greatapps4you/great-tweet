@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+<!--
+  ~ GreatApps4you LLC Copyright (c) 2020
+  ~ https://greatapps4you.us
+  ~ CSSML NDSMD VRS + NSMV SMQL IVB
+  -->
+
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
